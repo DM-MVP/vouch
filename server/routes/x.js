@@ -31,6 +31,8 @@ export function login(req, res) {
 
 export function callback(req, res) {
   console.log('address: ', req.session.address)
+  console.log('callback: ', req.session.callback)
+  console.log('token secret: ', req.session.tokenSecret)
   tw.callback({
     oauth_token: req.query.oauth_token,
     oauth_verifier: req.query.oauth_verifier
