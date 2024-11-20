@@ -15,6 +15,8 @@ export async function sendMessage({ address, transaction, username, value }) {
     { name: 'Identifier', value: username }
   ];
   console.log("tags: ", tags)
+  console.log("processId: ", processId)
+  console.log("voucher wallet address: ", key)
   const messageId = await message({
     process: processId,
     tags,
@@ -25,6 +27,8 @@ export async function sendMessage({ address, transaction, username, value }) {
     message: messageId
   })
   console.log('messageId', messageId)
+  console.log('-------')
+
   if (res.Error) {
     throw new Error(`Error with Vouch DAO: ${res.Error}`)
   }
