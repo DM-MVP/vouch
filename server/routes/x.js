@@ -11,7 +11,7 @@ const tw = new LoginWithX({
 
 export function login(req, res) {
   console.log('-------')
-  console.log('query params: ', JSON.stringify(req.query))
+  console.log('login query params: ', JSON.stringify(req.query))
   if (req.query.callback) {
     req.session.callback = req.query.callback
   }

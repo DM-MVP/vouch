@@ -52,9 +52,9 @@
         />
       </svg>
     </div>
-    <div class="w-[912px] pb-[23px] justify-center items-center inline-flex">
+    <div class="pb-[23px] justify-center items-center inline-flex">
       <div
-        class="w-[912px] text-zinc-400 text-[17px] font-normal font-['Satoshi'] tracking-tight"
+        class="text-zinc-400 text-[17px] font-normal font-['Satoshi'] tracking-tight"
       >
         Vouch your AOS Process!
       </div>

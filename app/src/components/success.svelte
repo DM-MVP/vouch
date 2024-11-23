@@ -1,6 +1,6 @@
 <script>
   import Confetti from "svelte-confetti";
-  import { assign } from "@permaweb/aoconnect";
+  import { VOUCH_PROCESS } from "../constants";
 
   export let address = "";
 
@@ -52,11 +52,10 @@
   }
 
   async function vouchAO() {
-    const vouch = "ZTTO02BL2P-lseTLUgiIPD9d0CF1sc4LbMA2AQ7e9jo";
     const processes = await getProcesses(address);
     await Promise.all(
       processes.map((pid) =>
-        fetch(`https://su-router.ao-testnet.xyz?process-id=${vouch}&assign=${pid}`, {
+        fetch(`https://su-router.ao-testnet.xyz?process-id=${VOUCH_PROCESS}&assign=${pid}`, {
           method: "POST",
         }).then((res) => res.json()),
       ),
@@ -118,9 +117,9 @@
         />
       </svg>
     </div>
-    <div class="w-[912px] pb-[23px] justify-center items-center inline-flex">
+    <div class="pb-[23px] justify-center items-center inline-flex">
       <div
-        class="w-[912px] text-zinc-400 text-[17px] font-normal font-['Satoshi'] tracking-tight"
+        class="text-zinc-400 text-[17px] font-normal font-['Satoshi'] tracking-tight"
       >
         Congrats! You are successfully vouched on the Permaweb!
       </div>

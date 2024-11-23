@@ -21,6 +21,6 @@ app.use(session({
 app.get('/', status)
 app.get('/x', login)
 app.get('/x/callback', callback)
-app.get('/vouch/info', getVouchInfo)
+app.get('/vouch/info', cors(), getVouchInfo)
 
 app.listen(8080)

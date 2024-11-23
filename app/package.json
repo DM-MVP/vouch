@@ -20,8 +20,12 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
-    "@othent/kms": "^1.0.5",
+    "@othent/kms": "^2.1.1",
     "@permaweb/aoconnect": "^0.0.53",
-    "arweave-wallet-connector": "^1.0.2"
+    "arweave-wallet-connector": "^1.0.2",
+    "axios": "^1.7.7"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }
