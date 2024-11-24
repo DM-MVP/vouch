@@ -12,6 +12,7 @@ app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'OPTIONS']
 }))
+app.set('trust proxy', 1)
 
 /** Routes */
 app.get('/', status)
