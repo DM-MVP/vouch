@@ -10,7 +10,6 @@
 
   router.mode.hash();
 
-
   // TODO check if active address is same as address in store on every address change
   
   // Add router guard to check wallet connection

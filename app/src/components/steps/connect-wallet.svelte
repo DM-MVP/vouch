@@ -34,14 +34,17 @@
   }
 
   async function othentConnect() {
-    const othent = new Othent({ appInfo: {
-      name: "VouchX(DecentraMind)",
-      version: "1.0.0",
-      env: "production",
-    } });
-    const result = await othent.connect();
-    //console.log("result: ", result);
-    setActiveAddress(result.walletAddress);
+    const othent = new Othent({
+      appInfo: {
+        name: "VouchX(DecentraMind)",
+        version: "1.0.0",
+        env: "production",
+      },
+      // Instantiate it passing in the inject = true option. This will set window.arweaveWallet to this Othent instance
+      inject: true
+    });
+    await othent.connect();
+    setActiveAddress();
   }
 </script>
 

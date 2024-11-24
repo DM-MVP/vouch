@@ -30,6 +30,7 @@
               size="md"
               onClick={() => {
                 localStorage.removeItem("arweave-address");
+                globalThis.arweaveWallet.disconnect();
                 $address = null;
                 router.goto("/");
               }}
