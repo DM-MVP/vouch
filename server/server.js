@@ -17,7 +17,7 @@ app.use(session({
   secret: 'chocolate milk',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: true, sameSite: 'none' }
 }))
 
 /** Routes */
