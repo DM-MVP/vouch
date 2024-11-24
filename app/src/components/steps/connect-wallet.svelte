@@ -54,12 +54,16 @@
   <ActionCard title="Choose your AR Wallet App to connect.">
     <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 md:text-white">
       {#each [
-        { name: 'ArConnect', onClick: arConnect },
-        { name: 'Arweave Wallet', onClick: arweaveApp },
-        { name: 'Othent', onClick: othentConnect }
+        { name: 'ArConnect', onClick: arConnect, icon: '#arconnect-wallet', iconUrl: 'https://www.arconnect.io/_next/image?url=%2Flogo.png&w=1080&q=75' },
+        { name: 'Arweave Wallet', onClick: arweaveApp, icon: '#arweave-wallet', iconClass: 'scale-115' },
+        { name: 'Othent', onClick: othentConnect, icon: '#othent-wallet' }
       ] as wallet}
         <Button onClick={wallet.onClick}>
-          <Icon href="#lucide-wallet" className="mr-2" />
+          {#if wallet.iconUrl}
+            <img src={wallet.iconUrl} alt={wallet.name} class="w-[18px] h-[18px] mr-2" />
+          {:else}
+            <Icon href={wallet.icon} className={`mr-2 ${wallet.iconClass}`} />
+          {/if}
           {wallet.name}
         </Button>
       {/each}

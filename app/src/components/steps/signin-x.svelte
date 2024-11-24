@@ -56,7 +56,7 @@
     </div>
   {:else}
     {#if vouchData && vouchData.length > 0}
-      <ActionCard title={`Your address ${$address.slice(0, 4)}...${$address.slice(-4)} has been vouched, no need to sign in with your X account.`}>
+      <ActionCard title={`Your address ${$address.slice(0, 4)}...${$address.slice(-4)} has been vouched, no need to vouch again.`}>
         <div class="relative w-full overflow-x-auto">
           <table class="w-full text-left">
             <thead>

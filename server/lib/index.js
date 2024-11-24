@@ -21,8 +21,8 @@ export function vouch(startdate, address, username, value) {
       .toPromise()
   } else {
     console.log('==========')
-    console.log(`unqualified address: ${address}`)
-    console.log(`unqualified username: ${username}`)
+    console.log(`address: ${address}`)
+    console.log(`unqualified twitter handle: ${username}`)
     console.log('==========')
     return Promise.reject({ message: `Not qualified: Twitter account created less than ${minimumMonths} months.` })
   }

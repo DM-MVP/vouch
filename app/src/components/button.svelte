@@ -8,7 +8,7 @@
   };
   const textSize = {
     md: "text-sm",
-    lg: "text-lg",
+    lg: "text-base",
   };
   const fontWeight = {
     md: "font-normal",
