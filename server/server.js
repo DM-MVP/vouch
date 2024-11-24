@@ -8,8 +8,11 @@ import { getVouchInfo } from './routes/get-vouch-info.js'
 
 const app = express()
 
-app.use(cors())
 app.set('trust proxy', 1)
+app.use(cors({
+  origin: '*',
+  methods: ['GET']
+}))
 app.use(session({
   secret: 'chocolate milk',
   resave: false,
