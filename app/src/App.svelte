@@ -18,6 +18,10 @@
       console.log("wallet is not connected, redirecting to connect-wallet page");
       router.goto("/");
     }
+    if ($address && route.path === '/') {
+      console.log("wallet is connected, redirecting to signin page");
+      router.goto("/signin");
+    }
   });
 </script>
 
