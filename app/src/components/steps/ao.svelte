@@ -60,7 +60,7 @@
       </div>
     </div>
     <div
-      class="w-[701px] h-[175px] px-6 bg-gradient-to-b from-violet-50 to-white rounded-[18px] shadow-inner border-2 border-indigo-500 border-opacity-50 flex-col justify-center items-start gap-[49px] flex"
+      class="w-[701px] h-[175px] px-6 bg-gradient-to-b from-violet-50 to-white rounded-lg shadow-inner border-2 border-indigo-500 border-opacity-50 flex-col justify-center items-start gap-[49px] flex"
     >
       <button
         on:click={doVouch}

@@ -1,6 +1,6 @@
 <script>
   import { router } from "tinro";
-  import WalletSvg from "./svg/wallet.svg.svelte";
+  import Icon from "./svg/icon.svelte";
 </script>
 
 {#if $router.path !== "/aos"}
@@ -9,7 +9,7 @@
       {
         step: 1,
         path: '/',
-        icon: WalletSvg,
+        icon: '#lucide-wallet',
         title: 'Connect Wallet',
         isIcon: true
       },
@@ -33,7 +33,7 @@
       <div class="flex items-center sm:gap-2">
         <div class={`p-3 rounded-lg ${$router.path === path ? 'bg-indigo-500 text-white' : 'bg-zinc-100'}`}>
           {#if isIcon}
-            <svelte:component this={icon} />
+            <Icon href={icon} className="w-6 h-6" />
           {:else}
             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href={icon} />

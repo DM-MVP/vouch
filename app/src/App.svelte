@@ -1,13 +1,25 @@
-<script>
+<script lang="ts">
   import { Route, router } from "tinro";
   import Layout from "./components/layout.svelte";
-  import Connect from "./components/connect-wallet.svelte";
-  import SignInX from "./components/signin-x.svelte";
-  import Success from "./components/success.svelte";
-  import Ao from "./components/ao.svelte";
+  import Connect from "./components/steps/connect-wallet.svelte";
+  import SignInX from "./components/steps/signin-x.svelte";
+  import Success from "./components/steps/success.svelte";
+  import Ao from "./components/steps/ao.svelte";
   import Nav from "./components/nav.svelte";
+  import { address } from "./store";
 
   router.mode.hash();
+
+
+  // TODO check if active address is same as address in store on every address change
+  
+  // Add router guard to check wallet connection
+  router.subscribe((route) => {
+    if (!$address && route.path !== '/') {
+      console.log("wallet is not connected, redirecting to connect-wallet page");
+      router.goto("/");
+    }
+  });
 </script>
 
 <Layout>
