@@ -13,6 +13,15 @@ app.use(cors({
   methods: ['GET', 'POST', 'OPTIONS']
 }))
 app.set('trust proxy', true)
+app.use(session({
+  secret: 'chocolate milk',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    secure: true,
+    sameSite: 'none' // Important for cross-origin requests
+  }
+}))
 
 /** Routes */
 app.get('/', status)
