@@ -8,17 +8,13 @@ import { getVouchInfo } from './routes/get-vouch-info.js'
 
 const app = express()
 
-// Simple CORS configuration for public API
 app.use(cors())
-app.set('trust proxy', true)
+app.set('trust proxy', 1)
 app.use(session({
   secret: 'chocolate milk',
   resave: false,
   saveUninitialized: true,
-  cookie: {
-    secure: true,
-    sameSite: 'none' // Important for cross-origin requests
-  }
+  cookie: { secure: true }
 }))
 
 /** Routes */
