@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import session from 'express-session'
 
 import { status } from './routes/status.js'
 import { login, callback } from './routes/x.js'
