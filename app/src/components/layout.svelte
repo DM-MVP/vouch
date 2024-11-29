@@ -2,7 +2,7 @@
   import { address } from "../store.js";
   import { router } from "tinro";
   import Svgs from "./svg/svgs.svelte";
-  import { VOUCH_PROCESS } from "../constants";
+  import { VOUCH_PROCESS, VOUCHER_NAME } from "../constants";
   import Button from "./button.svelte";
   import Icon from "./svg/icon.svelte";
 </script>
@@ -18,7 +18,7 @@
         <div class="flex flex-col items-start gap-4">
           <a href="/" class="text-3xl font-medium">VouchX</a>
           <span class="text-zinc-500 text-sm"
-            >Voucher: <b>DecentraMind</b><span> </span></span
+            >Voucher: <b>{VOUCHER_NAME}</b><span> </span></span
           >
         </div>
         {#if $address}
@@ -54,47 +54,52 @@
     >
       <slot name="main" />
     </div>
-    <p class="text-gray-400 text-base inline-flex flex-wrap gap-1">
-      <a
-        href="https://t.me/+_hXYYS6ptK80NDlh"
-        target="_blank"
-        class="hover:text-indigo-500 inline-flex items-center flex-wrap"
-      >
-        <Icon
-          href="#logos-telegram"
-          size={16}
-          className="mr-0.5 w-4 h-4"
-        />Join DecentraMind's Telegram channel </a
-      ><span>for any assistance or feedback.</span>
-    </p>
+
+    {#if VOUCHER_NAME === "DecentraMind"}
+      <p class="text-gray-400 text-base inline-flex flex-wrap gap-1">
+        <a
+          href="https://t.me/+_hXYYS6ptK80NDlh"
+          target="_blank"
+          class="hover:text-indigo-500 inline-flex items-center flex-wrap"
+        >
+          <Icon
+            href="#logos-telegram"
+            size={16}
+            className="mr-0.5 w-4 h-4"
+          />Join DecentraMind's Telegram channel
+        </a><span>for any assistance or feedback.</span>
+      </p>
+    {/if}
   </main>
 
   <!-- Footer -->
-  <footer class="bg-white border-t border-gray-200 p-4 sm:p-8 mt-8">
-    <div class="text-gray-400 text-sm text-left mb-4 leading-loose">
-      This is a <a
-        href="https://github.com/DM-MVP/vouch"
-        target="_blank"
-        class="hover:text-indigo-500">permaweb/vouch-x fork</a
-      >, using the same
-      <a
-        href={`https://www.ao.link/#/entity/${VOUCH_PROCESS}`}
-        target="_blank"
-        class="hover:text-indigo-500"
-      >
-        Vouch process in AO
-      </a>
-      as
-      <a
-        href="https://vouch-twitter.g8way.io/"
-        target="_blank"
-        class="hover:text-indigo-500">original VouchX</a
-      >, maintained by
-      <a
-        href="https://decentramind.club"
-        target="_blank"
-        class="hover:text-indigo-500">DecentraMind</a
-      >.
-    </div>
-  </footer>
+  {#if VOUCHER_NAME === "DecentraMind"}
+    <footer class="bg-white border-t border-gray-200 p-4 sm:p-8 mt-8">
+      <div class="text-gray-400 text-sm text-left mb-4 leading-loose">
+        This is a <a
+          href="https://github.com/DM-MVP/vouch"
+          target="_blank"
+          class="hover:text-indigo-500">permaweb/vouch-x fork</a
+        >, using the same
+        <a
+          href={`https://www.ao.link/#/entity/${VOUCH_PROCESS}`}
+          target="_blank"
+          class="hover:text-indigo-500"
+        >
+          Vouch process in AO
+        </a>
+        as
+        <a
+          href="https://vouch-twitter.g8way.io/"
+          target="_blank"
+          class="hover:text-indigo-500">original VouchX</a
+        >, maintained by
+        <a
+          href="https://decentramind.club"
+          target="_blank"
+          class="hover:text-indigo-500">DecentraMind</a
+        >.
+      </div>
+    </footer>
+  {/if}
 </div>

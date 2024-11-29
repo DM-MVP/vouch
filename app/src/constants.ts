@@ -8,6 +8,8 @@ export const VOUCHER_ADDRESSES = {
     url: 'https://decentramind.club/'
   }
 }
+export const VOUCHER_ADDRESS = import.meta.env.VITE_VOUCHER_ADDRESS;
+export const VOUCHER_NAME = VOUCHER_ADDRESSES[VOUCHER_ADDRESS].name;
 
 export const VOUCH_PROCESS = "ZTTO02BL2P-lseTLUgiIPD9d0CF1sc4LbMA2AQ7e9jo";
 
