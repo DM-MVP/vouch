@@ -1,5 +1,6 @@
 import { createDataItemSigner, message, result } from '@permaweb/aoconnect'
 import fs from 'fs'
+import { sendFeishuAlert } from './feishu.js'
 
 const key = JSON.parse(fs.readFileSync(process.env.WALLET, 'utf-8'))
 
@@ -30,7 +31,8 @@ export async function sendMessage({ address, transaction, username, value }) {
   console.log('-------')
 
   if (res.Error) {
-    throw new Error(`Error with Vouch DAO: ${res.Error}`)
+    await sendFeishuAlert(`Error in send message to AO: ${res.Error}\n${JSON.stringify(tags)}`)
+    throw new Error(`Error in send message to AO: ${res.Error}`)
   }
   return { address, transaction, value }
 }

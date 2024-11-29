@@ -5,8 +5,9 @@ import { dispatch } from '../lib/dispatch.js'
 // import { writeInteraction } from '../lib/write-interaction.js'
 import { isVouched } from '../lib/is-vouched.js'
 import { sendMessage } from './send-message.js'
+import { sendFeishuAlert } from './feishu.js'
 
-export function vouch(startdate, address, username, value) {
+export async function vouch(startdate, address, username, value) {
   const minimumMonths = 6
   const sixMonthsAgo = sub(new Date(), { months: minimumMonths })
   if (isBefore(parseISO(startdate), sixMonthsAgo)) {
@@ -24,6 +25,8 @@ export function vouch(startdate, address, username, value) {
     console.log(`address: ${address}`)
     console.log(`unqualified twitter handle: ${username}`)
     console.log('==========')
-    return Promise.reject({ message: `Not qualified: Twitter account created less than ${minimumMonths} months.` })
+    // send alert to feishu
+    await sendFeishuAlert(`Not qualified Twitter account:\n${JSON.stringify({ address, username })}`)
+    return Promise.reject({ message: `Not qualified: Your Twitter account created less than ${minimumMonths} months.` })
   }
 }

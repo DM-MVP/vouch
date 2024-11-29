@@ -23,4 +23,6 @@ node server/manual-vouch.js <AR_address> <X_handle>
 
 ## TODOs
 
+- [ ] check if cached connected wallet is active
+- [ ] Fix cors
 - [ ] Show all vouch records(failed and successful)
