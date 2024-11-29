@@ -30,11 +30,10 @@ export async function sendMessage({ address, transaction, username, value }) {
       message: messageId
     }), 10000)
     console.log('messageId', messageId)
-    console.log('vouch result', res)
+    // console.log('vouch result', res)
 
     if (res.Error) {
       await sendFeishuAlert(`Error in send message to AO: ${res.Error}\n${JSON.stringify(tags)}`)
-      console.log('-------')
       throw new Error(`Error in send message to AO: ${res.Error}`)
     }
 
@@ -44,12 +43,10 @@ export async function sendMessage({ address, transaction, username, value }) {
       }
       console.log('Vouch success!')
     } else {
-      console.error('Vouch failed!')
+      console.error('Vouch result messages empty: ', res)
     }
-    console.log('-------')
   } catch (e) {
     console.error('Vouch error:', e.message)
-    console.log('-------')
     throw e
   }
   return { address, transaction, value }

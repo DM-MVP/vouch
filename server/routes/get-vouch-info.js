@@ -9,17 +9,15 @@ export async function getVouchInfo(req, res) {
     { name: 'Action', value: 'Get-Vouches' },
     { name: 'ID', value: req.query.address }
   ];
-  console.log("tags: ", tags)
-  console.log("processId: ", processId)
   
   const ret = extractResult(await dryrun({
     process: processId,
     tags
   }))
 
-  console.log('------\nget vouch info of address: ', req.query.address)
-  console.log('result: ', ret)
-  console.log('------')
+  // console.log('------\nget vouch info of address: ', req.query.address)
+  // console.log('result: ', ret)
+  // console.log('------')
 
   return res.send(ret)
 }

@@ -66,6 +66,8 @@ export function callback(req, res) {
       } else {
         res.redirect(req.session.callback + '#/error?msg=' + err.message)
       }
+    }).finally(() => {
+      console.log('-------')
     })
   })
 }
