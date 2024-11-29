@@ -1,5 +1,6 @@
 import { message, result, createDataItemSigner } from './lib/ao.js'
 import fs from 'fs'
+import { withTimeout } from './lib/ao.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -19,7 +20,7 @@ if (!address || !handle) {
 const key = JSON.parse(fs.readFileSync(process.env.VOUCHER_WALLET, 'utf-8'))
 try {
   // vouch for address
-  const messageId = await message({
+  const messageId = await withTimeout(message({
     process: processId,
     signer: createDataItemSigner(key),
     tags: [
@@ -29,15 +30,20 @@ try {
       { name: 'Confidence-Value', value: '0-USD' },
       { name: 'Identifier', value: handle }
     ]
-  })
+  }), 5000)
   console.log('messageId: ', messageId)
 
-  const res = await result({
-    process: processId,
-    message: messageId
-  })
-
-  console.log(res)
+  try {
+    const res = await withTimeout(result({
+      process: processId,
+      message: messageId
+    }), 5000)
+    console.log('vouch result: ', res)
+  } catch (e) {
+    console.error('Vouch error:', e.message)
+    process.exit(1) // Force exit on timeout
+  }
 } catch (e) {
-  console.error(e)
+  console.error('Error:', e.message)
+  process.exit(1)
 }

@@ -57,7 +57,7 @@
 
 <StepCard
   title="Now that you connected your wallet, verify your X account to prove your
-    online public identity and get vouched on the permaweb."
+    online public identity and get vouched on the permaweb. One twitter account can only vouch for one address."
 >
   {#if loading}
     <div class="w-full h-full flex justify-center items-center text-zinc-400">

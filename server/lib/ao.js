@@ -39,3 +39,10 @@ export function extractResult(result) {
 
   return result.Messages[0].Data
 }
+
+export function withTimeout(promise, timeoutMs) {
+  const timeoutPromise = new Promise((_, reject) => {
+    setTimeout(() => reject(new Error('Operation timed out')), timeoutMs);
+  });
+  return Promise.race([promise, timeoutPromise]);
+}
