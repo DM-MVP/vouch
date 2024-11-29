@@ -12,9 +12,12 @@ export async function vouch(startdate, address, username, value) {
   const sixMonthsAgo = sub(new Date(), { months: minimumMonths })
   if (isBefore(parseISO(startdate), sixMonthsAgo)) {
     return of({ address, username, value })
-      .chain(ctx => fromPromise(isVouched)(ctx)
-        .chain(r => r.ok ? Rejected({ message: 'already vouched' }) : Resolved(ctx))
-      )
+      // check if already vouched
+      // disable for now, because the function isVouched is fetching transactions from gql endpoint, but not from AO process,
+      // so it's possible to vouch failed but the function still return { ok: true }.
+      // .chain(ctx => fromPromise(isVouched)(ctx)
+      //   .chain(r => r.ok ? Rejected({ message: 'already vouched' }) : Resolved(ctx))
+      // )
       .chain(fromPromise(dispatch))
       .chain(fromPromise(sendMessage))
       // .chain(fromPromise(writeInteraction))

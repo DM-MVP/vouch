@@ -37,8 +37,17 @@ try {
     const res = await withTimeout(result({
       process: processId,
       message: messageId
-    }), 5000)
+    }), 10000)
     console.log('vouch result: ', res)
+
+    if (res.Messages.length > 0) {
+      if (res.Messages.find(msg => msg.Data === 'Duplicate Identifier')) {
+        throw new Error('Duplicate Identifier: This twitter account has already been vouched for another address, please try another twitter account.')
+      }
+      console.log('Vouch success!')
+    } else {
+      console.error('Vouch failed!')
+    }
   } catch (e) {
     console.error('Vouch error:', e.message)
     process.exit(1) // Force exit on timeout

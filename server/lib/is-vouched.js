@@ -6,7 +6,7 @@ export async function isVouched({ address }) {
     .search("arweave:transactions")
     .from([process.env.VOUCHER_ADDRESS])
     .tags([
-      { name: 'Data-Protocol', values: 'Vouch-For' },
+      { name: 'Data-Protocol', values: 'Vouch' },
       { name: 'Vouch-For', values: [address] },
       { name: 'Method', values: ["X"] },
     ])
