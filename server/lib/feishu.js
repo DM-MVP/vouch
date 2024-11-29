@@ -1,6 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config({ path: '.env.test' })
-
 /**
  * Send alert message to Feishu/Lark
  * curl -X POST -H "Content-Type: application/json" \

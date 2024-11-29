@@ -2,7 +2,7 @@ import { createDataItemSigner, message, result } from '@permaweb/aoconnect'
 import fs from 'fs'
 import { sendFeishuAlert } from './feishu.js'
 
-const key = JSON.parse(fs.readFileSync(process.env.WALLET, 'utf-8'))
+const key = JSON.parse(fs.readFileSync(process.env.VOUCHER_WALLET, 'utf-8'))
 
 
 export async function sendMessage({ address, transaction, username, value }) {

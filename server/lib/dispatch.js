@@ -1,7 +1,7 @@
 import Irys from '@irys/sdk'
 import fs from 'fs'
 
-const key = JSON.parse(fs.readFileSync(process.env.WALLET, 'utf-8'))
+const key = JSON.parse(fs.readFileSync(process.env.VOUCHER_WALLET, 'utf-8'))
 
 export async function dispatch({ address, username, value }) {
   const url = process.env.IRYS_NODE || 'https://node2.irys.xyz'

@@ -15,8 +15,9 @@ The .env file contains some settings to be configured for the service to work pr
 | CONSUMER_KEY | Twitter Dev Account CONSUMER KEY |
 | CONSUMER_SECRET | Twitter Dev Account CONSUMER SECRET |
 | CALLBACK_URL | Url that is going to receive the call back from X OAuth |
-| WALLET | Path to the wallet.json file |
-| WALLET_ADDRESS | Address of the wallet |
+| VOUCHER_WALLET | Path to the wallet.json file |
+| VOUCHER_ADDRESS | Address of the wallet |
+| VOUCHER_NAME | Name of the voucher |
 | VOUCH_CONTRACT | Contract associated with the vouch dao |
 | VOUCH_DAO_PROCESS_ID | Process ID of the vouch dao |
 

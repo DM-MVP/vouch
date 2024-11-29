@@ -2,7 +2,7 @@ import { WarpFactory } from 'warp-contracts'
 import fs from 'fs'
 
 const warp = WarpFactory.forMainnet()
-const key = JSON.parse(fs.readFileSync(process.env.WALLET, 'utf-8'))
+const key = JSON.parse(fs.readFileSync(process.env.VOUCHER_WALLET, 'utf-8'))
 
 export async function writeInteraction({ address, transaction }) {
   const contract = warp.contract(process.env.VOUCH_CONTRACT)

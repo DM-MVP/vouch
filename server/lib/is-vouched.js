@@ -4,7 +4,7 @@ export async function isVouched({ address }) {
   const query = new Query()
   const results = await query
     .search("arweave:transactions")
-    .from([process.env.WALLET_ADDRESS])
+    .from([process.env.VOUCHER_ADDRESS])
     .tags([
       { name: 'Data-Protocol', values: 'Vouch-For' },
       { name: 'Vouch-For', values: [address] },

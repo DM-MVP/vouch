@@ -1,5 +1,7 @@
 import { message, result, createDataItemSigner } from './lib/ao.js'
 import fs from 'fs'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const processId = process.env.VOUCH_DAO_PROCESS_ID || 'L1CWfW_LAWA7UY_zf9CFwbnt3wLuVMEueylFi_1YACo'
 
@@ -14,23 +16,28 @@ if (!address || !handle) {
   process.exit(1)
 }
 
-const key = JSON.parse(fs.readFileSync('./wallet.json', 'utf-8'))
-// vouch for address
-const messageId = await message({
-  process: processId,
-  signer: createDataItemSigner(key),
-  tags: [
-    { name: 'Data-Protocol', value: 'Vouch' },
-    { name: 'Vouch-For', value: address },
-    { name: 'Method', value: 'X' },
-    { name: 'Confidence-Value', value: '0-USD' },
-    { name: 'Identifier', value: handle }
-  ]
-})
+const key = JSON.parse(fs.readFileSync(process.env.VOUCHER_WALLET, 'utf-8'))
+try {
+  // vouch for address
+  const messageId = await message({
+    process: processId,
+    signer: createDataItemSigner(key),
+    tags: [
+      { name: 'Data-Protocol', value: 'Vouch' },
+      { name: 'Vouch-For', value: address },
+      { name: 'Method', value: 'X' },
+      { name: 'Confidence-Value', value: '0-USD' },
+      { name: 'Identifier', value: handle }
+    ]
+  })
+  console.log('messageId: ', messageId)
 
-const res = await result({
-  process: processId,
-  message: messageId
-})
+  const res = await result({
+    process: processId,
+    message: messageId
+  })
 
-console.log(res)
+  console.log(res)
+} catch (e) {
+  console.error(e)
+}
