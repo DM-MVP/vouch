@@ -31,7 +31,7 @@ export function extractResult(result) {
 
   if (!result?.Messages?.[0]?.Data) {
     console.error('Failed to extract data from result.Messages', result)
-    if (result.Output.print) {
+    if (result.Output && result.Output.print) {
       console.error(result.Output.data)
     }
     throw new Error('Failed to extract data from result.Messages.')

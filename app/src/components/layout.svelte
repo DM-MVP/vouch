@@ -66,7 +66,7 @@
             href="#logos-telegram"
             size={16}
             className="mr-0.5 w-4 h-4"
-          />Join DecentraMind's Telegram channel
+          />Join DecentraMind Telegram channel
         </a><span>for any assistance or feedback.</span>
       </p>
     {/if}
