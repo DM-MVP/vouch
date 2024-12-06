@@ -17,7 +17,7 @@ export async function getVouchInfo(req, res) {
         process: processId,
         tags
       }),
-      5000
+      15000
     );
     const result = extractResult(ret);
 
