@@ -1,4 +1,5 @@
-import { dryrun, extractResult } from '../lib/ao.js'
+import { dryrun, extractResult, withTimeout } from '../lib/ao.js'
+
 // can check session, if valid, then validate a signed message
 // and then vouch the user
 
@@ -10,14 +11,23 @@ export async function getVouchInfo(req, res) {
     { name: 'ID', value: req.query.address }
   ];
   
-  const ret = extractResult(await dryrun({
-    process: processId,
-    tags
-  }))
+  try {
+    const ret = await withTimeout(
+      dryrun({
+        process: processId,
+        tags
+      }),
+      5000
+    );
+    const result = extractResult(ret);
 
-  // console.log('------\nget vouch info of address: ', req.query.address)
-  // console.log('result: ', ret)
-  // console.log('------')
+    // console.log('------\nget vouch info of address: ', req.query.address)
+    // console.log('result: ', ret)
+    // console.log('------')
 
-  return res.send(ret)
+    return res.send(result)
+  } catch (e) {
+    console.error('Error in getVouchInfo: ', e)
+    return res.status(500).send({ error: e.message })
+  }
 }
