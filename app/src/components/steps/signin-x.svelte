@@ -14,7 +14,8 @@
     if ($address) {
       // check if this address has already been vouched
       const response = await fetch(
-        `${AUTH_SERVICE}/vouch/info?address=${$address}`
+        `${AUTH_SERVICE}/vouch/info?address=${$address}`,
+        { signal: AbortSignal.timeout(5000) }
       );
       const data = await response.json();
       console.log("vouch data: ", data);
