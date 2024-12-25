@@ -28,7 +28,7 @@ export async function sendMessage({ address, transaction, username, value }) {
     const res = await withTimeout(result({
       process: processId,
       message: messageId
-    }), 10000)
+    }), 20000)
     console.log('messageId', messageId)
     // console.log('vouch result', res)
 
