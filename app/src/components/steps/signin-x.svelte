@@ -54,11 +54,20 @@
       globalThis.location.href
     )}`;
   }
+
+  function telegramLogin() {
+    const addr = $address;
+    console.log("teltegram login, address: ", addr);
+    if (!addr) {
+      alert("Please connect your wallet first.");
+      return;
+    }
+  }
 </script>
 
 <StepCard
-  title="Now that you connected your wallet, verify your X account to prove your
-    online public identity and get vouched on the permaweb. One twitter account can only vouch for one address."
+  title="Now that you connected your wallet, verify your X or Telegram account to prove your
+    online public identity and get vouched on the permaweb. One X/Telegram account can only vouch for one address."
 >
   {#if loading}
     <div class="w-full h-full flex justify-center items-center text-zinc-400">
@@ -106,5 +115,11 @@
         <Icon href="#ri-twitter-x-line" className="mr-2" />Connect
       </Button>
     </ActionCard>
+    <ActionCard title="Connect your Telegram Account.">
+      <Button onClick={telegramLogin}>
+        <Icon href="#logos-telegram" className="mr-2" />Connect
+      </Button>
+    </ActionCard>
   {/if}
+  <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="PermawebVoucher_bot" data-size="large" data-auth-url="https://v.decentramind.club/telegram/callback"></script>
 </StepCard>

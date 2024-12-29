@@ -11,7 +11,7 @@ export async function vouch(startdate, address, username, value) {
   const minimumMonths = 6
   const sixMonthsAgo = sub(new Date(), { months: minimumMonths })
   if (isBefore(parseISO(startdate), sixMonthsAgo)) {
-    return of({ address, username, value })
+    return of({ address, username, value, method: 'X' })
       // check if already vouched
       // disable for now, because the function isVouched is fetching transactions from gql endpoint, but not from AO process,
       // so it's possible to vouch failed but the function still return { ok: true }.
@@ -32,4 +32,14 @@ export async function vouch(startdate, address, username, value) {
     await sendFeishuAlert(`Not qualified Twitter account:\n${JSON.stringify({ address, username })}`)
     return Promise.reject({ message: `Not qualified: Your Twitter account created less than ${minimumMonths} months.` })
   }
+}
+
+
+export async function vouchTelegram(address, username, value) {
+  return of({ address, username, value, method: 'Telegram' })
+    .chain(fromPromise(dispatch))
+    .chain(fromPromise(sendMessage))
+    // .chain(fromPromise(writeInteraction))
+
+    .toPromise()
 }

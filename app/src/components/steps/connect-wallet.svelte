@@ -12,6 +12,7 @@
     const activeAddress = addr || (await globalThis.arweaveWallet.getActiveAddress());
     $address = activeAddress;
     localStorage.setItem("arweave-address", activeAddress);
+
     router.goto("/signin");
   }
 

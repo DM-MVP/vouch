@@ -16,7 +16,7 @@
       step: 2,
       path: '/signin', 
       icon: '#ri-twitter-x-line',
-      title: 'Sign-In With X'
+      title: 'Connect Social Account'
     },
     {
       step: 3,
