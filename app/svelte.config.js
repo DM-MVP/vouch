@@ -6,9 +6,12 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 //   preprocess: vitePreprocess(),
 // }
 
-import adapter from '@zeabur/svelte-adapter'; // <-- 注意这里
+import adapter from '@zeabur/svelte-adapter';
  
 export default {
+  // Consult https://svelte.dev/docs#compile-time-svelte-preprocess
+  // for more information about preprocessors
+  preprocess: vitePreprocess(),
   kit: {
     adapter: adapter()
   }
