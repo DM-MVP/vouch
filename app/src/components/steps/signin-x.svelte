@@ -8,7 +8,8 @@
   import Icon from "../svg/icon.svelte";
   import { onMount } from "svelte";
 
-  let vouchData = null;
+  let vouchDataX = null;
+  let vouchDataTelegram = null;
   let loading = true;
   async function checkVouched() {
     if ($address) {
@@ -21,13 +22,21 @@
       console.log("vouch data: ", data);
 
       if (data.Vouchers && Object.keys(data.Vouchers).length > 0) {
-        vouchData = Object.entries(data.Vouchers)
+        vouchDataX = Object.entries(data.Vouchers)
           .map(([key, value]) => ({
             voucher: key,
             ...value,
           }))
           .filter(
-            (v) => v.Method && v.Method === "X" && v["Vouch-For"] === $address
+            (v) => v.Method && (v.Method === "X") && v["Vouch-For"] === $address
+          );
+        vouchDataTelegram = Object.entries(data.Vouchers)
+          .map(([key, value]) => ({
+            voucher: key,
+            ...value,
+          }))
+          .filter(
+            (v) => v.Method && (v.Method === "Telegram") && v["Vouch-For"] === $address
           );
       }
     }
@@ -73,49 +82,87 @@
     <div class="w-full h-full flex justify-center items-center text-zinc-400">
       <Icon href="#svg-spinners-gooey-balls-2" />
     </div>
-  {:else if vouchData && vouchData.length > 0}
-    <ActionCard
-      title={`Your address ${$address.slice(0, 4)}...${$address.slice(-4)} has been vouched, no need to vouch again.`}
-    >
-      <div class="relative w-full overflow-x-auto">
-        <table class="w-full text-left">
-          <thead>
-            <tr>
-              <th class="pl-2 pr-4 py-2">Voucher Address</th>
-              <th class="px-2 py-2">X Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each vouchData as vouch}
-              <tr class="border-t">
-                <td class="pl-2 pr-4 py-2 text-zinc-700 font-['Satoshi']"
-                  >{VOUCHER_ADDRESSES[vouch.voucher]?.name
-                    ? `${VOUCHER_ADDRESSES[vouch.voucher].name} (${vouch.voucher})`
-                    : vouch.voucher}</td
-                >
-                <td class="px-2 py-2 text-zinc-500">
-                  {#if vouch.Identifier}
-                    <a
-                      href={`https://x.com/${vouch.Identifier}`}
-                      target="_blank"
-                      class="text-indigo-500 hover:underline"
-                      >@{vouch.Identifier}</a
-                    >
-                  {/if}
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    </ActionCard>
   {:else}
-    <ActionCard title="Connect your X Account.">
+    {#if vouchDataX && vouchDataX.length > 0}
+      <ActionCard
+        title={`Your address ${$address.slice(0, 4)}...${$address.slice(-4)} has been vouched.`}
+      >
+        <div class="relative w-full overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr>
+                <th class="pl-2 pr-4 py-2">Voucher Address</th>
+                <th class="px-2 py-2">X Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each vouchDataX as vouch}
+                <tr class="border-t">
+                  <td class="pl-2 pr-4 py-2 text-zinc-700 font-['Satoshi']"
+                    >{VOUCHER_ADDRESSES[vouch.voucher]?.name
+                      ? `${VOUCHER_ADDRESSES[vouch.voucher].name} (${vouch.voucher})`
+                      : vouch.voucher}</td
+                  >
+                  <td class="px-2 py-2 text-zinc-500">
+                    {#if vouch.Identifier}
+                      <a
+                        href={`https://x.com/${vouch.Identifier}`}
+                        target="_blank"
+                        class="text-indigo-500 hover:underline"
+                        >@{vouch.Identifier}</a
+                      >
+                    {/if}
+                  </td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      </ActionCard>
+    {/if}
+    <ActionCard title={vouchDataX && vouchDataX.length > 0 ? "Your address has been vouched, but you can connect to update your X account." : "Connect your X Account."}>
       <Button onClick={login}>
         <Icon href="#ri-twitter-x-line" className="mr-2" />Connect
       </Button>
     </ActionCard>
-    <ActionCard title="Connect your Telegram Account.">
+    {#if vouchDataTelegram && vouchDataTelegram.length > 0}
+      <ActionCard
+        title={`Your address ${$address.slice(0, 4)}...${$address.slice(-4)} has been vouched.`}
+      >
+        <div class="relative w-full overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr>
+                <th class="pl-2 pr-4 py-2">Voucher Address</th>
+                <th class="px-2 py-2">Telegram Username</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each vouchDataX as vouch}
+                <tr class="border-t">
+                  <td class="pl-2 pr-4 py-2 text-zinc-700 font-['Satoshi']"
+                    >{VOUCHER_ADDRESSES[vouch.voucher]?.name
+                      ? `${VOUCHER_ADDRESSES[vouch.voucher].name} (${vouch.voucher})`
+                      : vouch.voucher}</td
+                  >
+                  <td class="px-2 py-2 text-zinc-500">
+                    {#if vouch.Identifier}
+                      <a
+                        href={`https://x.com/${vouch.Identifier}`}
+                        target="_blank"
+                        class="text-indigo-500 hover:underline"
+                        >@{vouch.Identifier}</a
+                      >
+                    {/if}
+                  </td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      </ActionCard>
+    {/if}
+    <ActionCard title={vouchDataTelegram && vouchDataTelegram.length > 0 ? "Your address has been vouched, but you can connect to update your Telegram account." : "Connect your Telegram Account."}>
       <Button onClick={telegramLogin}>
         <Icon href="#logos-telegram" className="mr-2" />Connect
       </Button>

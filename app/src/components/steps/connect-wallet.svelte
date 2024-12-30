@@ -21,7 +21,7 @@
       alert("ArConnect is not installed. goto https://arconnect.io");
       return;
     }
-    await globalThis.arweaveWallet.connect(["ACCESS_ADDRESS"]);
+    await globalThis.arweaveWallet.connect(["ACCESS_ADDRESS", "ACCESS_ALL_ADDRESSES"]);
     setActiveAddress();
   }
 
