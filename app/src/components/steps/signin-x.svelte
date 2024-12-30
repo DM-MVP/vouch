@@ -141,7 +141,7 @@
               </tr>
             </thead>
             <tbody>
-              {#each vouchDataX as vouch}
+              {#each vouchDataTelegram as vouch}
                 <tr class="border-t">
                   <td class="pl-2 pr-4 py-2 text-zinc-700 font-['Satoshi']"
                     >{VOUCHER_ADDRESSES[vouch.voucher]?.name
