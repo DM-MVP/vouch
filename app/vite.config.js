@@ -10,7 +10,7 @@ export default defineConfig({
     svelte()
   ],
   server: {
-    port: 80,
+    port: 8080,
     strictPort: true,
     host: true,
     cors: true
