@@ -2,6 +2,7 @@ import { vouchTelegram } from '../lib/index.js'
 
 export async function telegramCallback(req, res) {
   console.log('telegram callback req: ', req.query)
+  const redicretOrgin = req.query.return_origin
   /**
    * example query:
    * {
@@ -25,12 +26,13 @@ export async function telegramCallback(req, res) {
       throw new Error("address or username is required")
     }
     await vouchTelegram(req.query.address, req.query.username, 0)
+    res.redirect(redicretOrgin + '/#/success?address=' + req.session.address)
   } catch(err) {
     console.error(err)
     if (err.message === "already vouched") {
-      res.redirect(req.session.callback + '#/success?msg=' + err.message + '&address=' + req.session.address)
+      res.redirect(req.session.callback + '/#/success?msg=' + err.message + '&address=' + req.session.address)
     } else {
-      res.redirect(req.session.callback + '#/error?msg=' + err.message)
+      res.redirect(req.session.callback + '/#/error?msg=' + err.message)
     }
   } finally {
     console.log('-------')

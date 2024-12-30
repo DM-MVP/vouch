@@ -8,6 +8,9 @@
   import Icon from "../svg/icon.svelte";
   import { onMount } from "svelte";
 
+  // after telegram login, redirect to the same site
+  const returnOrigin = new URL(globalThis.location.href).origin
+
   let vouchDataX = null;
   let vouchDataTelegram = null;
   let loading = true;
@@ -163,7 +166,7 @@
       </ActionCard>
     {/if}
     <ActionCard title={vouchDataTelegram && vouchDataTelegram.length > 0 ? "Your address has been vouched, but you can connect to update your Telegram account." : "Connect your Telegram Account."}>
-      <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="PermawebVoucher_bot" data-size="large" data-auth-url="https://v.decentramind.club/telegram/callback?address={$address}"></script>
+      <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="PermawebVoucher_bot" data-size="large" data-auth-url="https://v.decentramind.club/telegram/callback?address={$address}&return_origin={returnOrigin}"></script>
     </ActionCard>
   {/if}
 </StepCard>
