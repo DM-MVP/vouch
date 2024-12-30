@@ -163,10 +163,7 @@
       </ActionCard>
     {/if}
     <ActionCard title={vouchDataTelegram && vouchDataTelegram.length > 0 ? "Your address has been vouched, but you can connect to update your Telegram account." : "Connect your Telegram Account."}>
-      <Button onClick={telegramLogin}>
-        <Icon href="#logos-telegram" className="mr-2" />Connect
-      </Button>
+      <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="PermawebVoucher_bot" data-size="large" data-auth-url="https://v.decentramind.club/telegram/callback?address={$address}"></script>
     </ActionCard>
   {/if}
-  <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="PermawebVoucher_bot" data-size="large" data-auth-url="https://v.decentramind.club/telegram/callback"></script>
 </StepCard>

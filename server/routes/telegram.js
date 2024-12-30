@@ -24,7 +24,7 @@ export async function telegramCallback(req, res) {
     if (!req.query.address || !req.query.username) {
       throw new Error("address or username is required")
     }
-    await vouchTelegram(req.query.address, req.query.username)
+    await vouchTelegram(req.query.address, req.query.username, 0)
   } catch(err) {
     console.error(err)
     if (err.message === "already vouched") {

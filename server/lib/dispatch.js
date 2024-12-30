@@ -16,5 +16,5 @@ export async function dispatch({ address, username, value, method }) {
       { name: 'Verification-Method', value: method }
     ]
   })
-  return { address, transaction: receipt.id, username, value }
+  return { address, transaction: receipt.id, username, value, method }
 }
