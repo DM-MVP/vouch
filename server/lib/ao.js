@@ -40,6 +40,19 @@ export function extractResult(result) {
   return result.Messages[0].Data
 }
 
+/**
+ * Send message to AO, then get result, check if error exists, then extract data from result
+ */
+export async function messageResult(messageParams) {
+  const messageId = await message(messageParams)
+  const res = await result({ process: messageParams.process, message: messageId })
+  return extractResult(res)
+}
+
+export async function messageResultParsed(messageParams) {
+  return JSON.parse(await messageResult(messageParams))
+}
+
 export function withTimeout(promise, timeoutMs) {
   const timeoutPromise = new Promise((_, reject) => {
     setTimeout(() => reject(new Error('Operation timed out')), timeoutMs);

@@ -1,4 +1,7 @@
-import { dryrun, extractResult, withTimeout } from '../lib/ao.js'
+import { createDataItemSigner, messageResultParsed, withTimeout } from '../lib/ao.js'
+import fs from 'fs'
+
+const key = JSON.parse(fs.readFileSync(process.env.VOUCHER_WALLET, 'utf-8'))
 
 // can check session, if valid, then validate a signed message
 // and then vouch the user
@@ -12,14 +15,14 @@ export async function getVouchInfo(req, res) {
   ];
   
   try {
-    const ret = await withTimeout(
-      dryrun({
+    const result = await withTimeout(
+      messageResultParsed({
         process: processId,
-        tags
+        tags,
+        signer: createDataItemSigner(key)
       }),
-      15000
+      25000
     );
-    const result = extractResult(ret);
 
     // console.log('------\nget vouch info of address: ', req.query.address)
     // console.log('result: ', ret)
