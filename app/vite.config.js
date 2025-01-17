@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import basicSsl from '@vitejs/plugin-basic-ssl'
+// import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,10 +9,10 @@ export default defineConfig({
     // basicSsl(),
     svelte()
   ],
-  // server: {
-  //   port: 443,
-  //   strictPort: true,
-  //   host: true,
-  //   cors: true
-  // },
+  server: {
+    port: 8080,
+    strictPort: true,
+    host: true,
+    cors: true
+  },
 })
