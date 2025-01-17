@@ -78,8 +78,8 @@
 </script>
 
 <StepCard
-  title="Now that you connected your wallet, verify your X or Telegram account to prove your
-    online public identity and get vouched on the permaweb. One X/Telegram account can only vouch for one address."
+  title="Now that you connected your wallet, verify your X account to prove your
+    online public identity and get vouched on the permaweb. One X account can only vouch for one address."
 >
   {#if loading}
     <div class="w-full h-full flex justify-center items-center text-zinc-400">
@@ -131,8 +131,9 @@
     {#if vouchDataTelegram && vouchDataTelegram.length > 0}
       <ActionCard
         title={`Your address ${$address.slice(0, 4)}...${$address.slice(-4)} has been vouched.`}
+        className="hidden"
       >
-        <div class="relative w-full overflow-x-auto">
+        <div class="hidden relative w-full overflow-x-auto">
           <table class="w-full text-left">
             <thead>
               <tr>
@@ -165,7 +166,7 @@
         </div>
       </ActionCard>
     {/if}
-    <ActionCard title={vouchDataTelegram && vouchDataTelegram.length > 0 ? "Your address has been vouched, but you can connect to update your Telegram account." : "Connect your Telegram Account."}>
+    <ActionCard title={vouchDataTelegram && vouchDataTelegram.length > 0 ? "Your address has been vouched, but you can connect to update your Telegram account." : "Connect your Telegram Account."} className="hidden">
       <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="PermawebVoucher_bot" data-size="large" data-auth-url="https://v.decentramind.club/telegram/callback?address={$address}&return_origin={returnOrigin}"></script>
     </ActionCard>
   {/if}
