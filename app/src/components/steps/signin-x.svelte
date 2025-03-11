@@ -63,7 +63,7 @@
       return;
     }
     globalThis.location.href = `${AUTH_SERVICE}/x?address=${addr}&callback=${encodeURI(
-      globalThis.location.href
+      globalThis.location.href.replace(/#.*$/, '')
     )}`;
   }
 
