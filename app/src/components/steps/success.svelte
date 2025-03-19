@@ -69,7 +69,7 @@
 </div>
 
 <StepCard title="Congrats! You are successfully vouched on the Permaweb!">
-  <ActionCard title="Optionally, you can">
+  <ActionCard title="Optionally, you can" className="hidden">
     <Button buttonText="Vouch your AO processes" onClick={vouchAO} />
   </ActionCard>
   <div
