@@ -9,19 +9,23 @@
   import Icon from "../svg/icon.svelte";
 
   async function setActiveAddress(addr = null) {
-    const activeAddress = addr || (await globalThis.arweaveWallet.getActiveAddress());
+    const activeAddress =
+      addr || (await globalThis.arweaveWallet.getActiveAddress());
     $address = activeAddress;
     localStorage.setItem("arweave-address", activeAddress);
 
     router.goto("/signin");
   }
 
-  async function arConnect() {
+  async function wander() {
     if (!globalThis.arweaveWallet) {
-      alert("ArConnect is not installed. goto https://arconnect.io");
+      alert("Wander is not installed. goto https://wander.app");
       return;
     }
-    await globalThis.arweaveWallet.connect(["ACCESS_ADDRESS", "ACCESS_ALL_ADDRESSES"]);
+    await globalThis.arweaveWallet.connect([
+      "ACCESS_ADDRESS",
+      "ACCESS_ALL_ADDRESSES",
+    ]);
     setActiveAddress();
   }
 
@@ -42,29 +46,83 @@
         env: "production",
       },
       // Instantiate it passing in the inject = true option. This will set window.arweaveWallet to this Othent instance
-      inject: true
+      inject: true,
     });
     await othent.connect();
     setActiveAddress();
   }
 </script>
 
-<StepCard title="Connect your Arweave wallet to get yourself vouched using this VouchX
-    service.">
-
+<StepCard
+  title="Connect your Arweave wallet to get yourself vouched using this VouchX
+    service."
+>
   <ActionCard title="Choose your AR Wallet App to connect.">
-    <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 md:text-white">
-      {#each [
-        { name: 'ArConnect', onClick: arConnect, icon: '#arconnect-wallet', iconUrl: 'https://www.arconnect.io/_next/image?url=%2Flogo.png&w=1080&q=75' },
-        { name: 'Arweave Wallet', onClick: arweaveApp, icon: '#arweave-wallet', iconClass: 'scale-115' },
-        { name: 'Othent', onClick: othentConnect, icon: '#othent-wallet' }
-      ] as wallet}
+    <div
+      class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 md:text-white"
+    >
+      {#each [{ name: "Wander", onClick: wander, icon: "#wander-wallet" }] as wallet},
+        <!-- { name: 'Arweave Wallet', onClick: arweaveApp, icon: '#arweave-wallet', iconClass: 'scale-115' },
+        { name: 'Othent', onClick: othentConnect, icon: '#othent-wallet' } -->
         <Button onClick={wallet.onClick}>
-          {#if wallet.iconUrl}
-            <img src={wallet.iconUrl} alt={wallet.name} class="w-[18px] h-[18px] mr-2" />
-          {:else}
-            <Icon href={wallet.icon} className={`mr-2 ${wallet.iconClass}`} />
-          {/if}
+          <svg
+            width="32"
+            height="24"
+            viewBox="0 0 130 78"
+            fill="none"
+            class="mr-1"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M89.3721 39.8985L66.4471 10.8297C65.4813 9.57643 64.5342 9.37175 63.4969 10.7178L40.5366 39.8512L62.7595 59.9368L64.9176 13.9193L67.0756 59.9368L89.3721 39.8985Z"
+              fill="url(#paint0_linear_146_7479)"
+            />
+            <path
+              d="M105.651 69.9407L128.95 20.2211C129.45 19.132 128.256 18.0437 127.218 18.6416L92.3794 38.6657L69.7344 64.176L105.651 69.9407Z"
+              fill="url(#paint1_linear_146_7479)"
+            />
+            <path
+              d="M24.1509 69.9407L0.851883 20.2211C0.352089 19.132 1.54565 18.0437 2.58412 18.6416L37.4226 38.6657L60.0676 64.176L24.1509 69.9407Z"
+              fill="url(#paint2_linear_146_7479)"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_146_7479"
+                x1="64.7823"
+                y1="59.9368"
+                x2="64.7823"
+                y2="9.79541"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#6B57F9" />
+                <stop offset="1" stop-color="#9787FF" />
+              </linearGradient>
+              <linearGradient
+                id="paint1_linear_146_7479"
+                x1="79.0015"
+                y1="49.711"
+                x2="110.284"
+                y2="67.4809"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#6B57F9" />
+                <stop offset="1" stop-color="#9787FF" />
+              </linearGradient>
+              <linearGradient
+                id="paint2_linear_146_7479"
+                x1="50.8005"
+                y1="49.711"
+                x2="19.5178"
+                y2="67.4809"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#6B57F9" />
+                <stop offset="1" stop-color="#9787FF" />
+              </linearGradient>
+            </defs>
+          </svg>
           {wallet.name}
         </Button>
       {/each}
